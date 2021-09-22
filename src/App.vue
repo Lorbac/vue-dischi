@@ -2,23 +2,23 @@
   <div id="app">
     <Header />
 
-    <Main />
+    <Dischi />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
-import Main from './components/Main.vue'
+import Dischi from './components/Dischi.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
-    Main
+    Dischi
   }
 }
 </script>
 
 <style lang="scss">
-
+  @import "./styles/general.scss"
 </style>
