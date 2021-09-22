@@ -1,28 +1,34 @@
 <template>
   <main>
       <div class="container">
-          <div class="row">
+          <div v-if="success" class="row py-5">
                 <div class="col-12 col-md-5 col-lg-2" v-for="(album,index) in albumList" :key="index">
                     <Disco :info="album"/>
                 </div>
           </div>
+
+          <Loader v-else />
       </div>
+
   </main>
 </template>
 
 <script>
 import axios from "axios";
-import Disco from "../components/Disco.vue"
+import Disco from "../components/Disco.vue";
+import Loader from './Loader.vue';
 
 export default {
     name: 'Main',
     components: {
         Disco,
+        Loader
     },
     data() {
         return {
             APIUrl: "https://flynn.boolean.careers/exercises/api/array/music",
-            albumList: []
+            albumList: [],
+            success: false,
         }
     },
     created() {
@@ -35,7 +41,7 @@ export default {
                 .then(res => {
                     // console.log(res.data.response);
                     this.albumList = res.data.response;
-                    res.data.success = false;
+                    this.success = res.data.success;
                 })
                 .catch( err => {
                     console.log("Error ", err);
@@ -59,11 +65,6 @@ export default {
 
                 width: 80%;
                 margin: 0 auto; 
-
-                .col-12 {
-                    border: 20px solid #1E2D3C;
-                    background-color: $secondary-bg-color;
-                }
             }
         }
     }
