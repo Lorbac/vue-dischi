@@ -52,6 +52,7 @@ export default {
     main {
         background-color: $primary-bg-color;
         height: calc(100vh - 90px);
+        overflow-y: auto;
         
         .container {
             .row {
