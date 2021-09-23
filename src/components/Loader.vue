@@ -34,7 +34,6 @@ export default {
     width: 70px;
     margin: 1rem 0;
     animation: pulse 1s infinite alternate;
-    color: blue;
   }
 
   @keyframes pulse {

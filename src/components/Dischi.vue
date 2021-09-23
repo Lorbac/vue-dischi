@@ -2,7 +2,7 @@
   <main>
       <div class="container">
           <div v-if="success" class="row py-5">
-                <div class="col-12 col-md-5 col-lg-2" v-for="(album,index) in albumList" :key="index">
+                <div class="col-12 col-md-5 col-lg-2" v-for="(album,index) in filteredAlbumList" :key="index">
                     <Disco :info="album"/>
                 </div>
           </div>
@@ -19,7 +19,8 @@ import Disco from "../components/Disco.vue";
 import Loader from './Loader.vue';
 
 export default {
-    name: 'Main',
+    name: 'Dischi',
+    props: ["filterDisc"],
     components: {
         Disco,
         Loader
@@ -33,6 +34,19 @@ export default {
     },
     created() {
         this.getAlbums();
+    },
+    computed: {
+        filteredAlbumList() {
+        if (this.filterDisc === "all") {
+            return this.albumList;
+        }
+
+        let filteredList = this.albumList.filter( item => {
+            return item.genre.toLowerCase().includes(this.filterDisc);
+        })
+
+        return filteredList;
+        }
     },
     methods: {
         getAlbums() {

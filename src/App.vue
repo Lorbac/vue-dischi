@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Header />
+    <Header @performSearch="searchGenre" />
 
-    <Dischi />
+    <Dischi :filterDisc="inputText" />
   </div>
 </template>
 
@@ -15,6 +15,16 @@ export default {
   components: {
     Header,
     Dischi
+  },
+  data() {
+    return {
+      inputText: "",
+    }
+  },
+  methods: {
+    searchGenre(text) {
+      this.inputText = text;
+    }
   }
 }
 </script>
