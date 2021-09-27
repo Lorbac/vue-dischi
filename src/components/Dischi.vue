@@ -30,10 +30,12 @@ export default {
             APIUrl: "https://flynn.boolean.careers/exercises/api/array/music",
             albumList: [],
             success: false,
+            listGenre:[],
         }
     },
     created() {
         this.getAlbums();
+        
     },
     computed: {
         filteredAlbumList() {
@@ -46,7 +48,7 @@ export default {
         })
 
         return filteredList;
-        }
+        },
     },
     methods: {
         getAlbums() {
@@ -56,11 +58,18 @@ export default {
                     // console.log(res.data.response);
                     this.albumList = res.data.response;
                     this.success = res.data.success;
+
+                    this.albumList.forEach((disc) => {
+                        if (this.listGenre.includes(disc.genre) == false) 
+                        {
+                            this.listGenre.push(disc.genre);
+                        }
+                    });
                 })
                 .catch( err => {
                     console.log("Error ", err);
                 })
-        }
+        },
     },
 }
 </script>
